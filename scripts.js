@@ -1,231 +1,365 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ola Energy: From Fuel Station to Lifestyle Destination</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@400;600;700;800&display=swap"
-        rel="stylesheet"
-    />
-</head>
-<body data-lang="en">
-    <header class="header">
-        <div class="header-logos">
-            <img
-                src="https://ik.imagekit.io/weo7pcw8v/Ola%20TR%20Logo.png?updatedAt=1754672101855"
-                alt="Ola Energy Logo"
-            />
-        </div>
-        <button class="lang-toggle" id="lang-toggle-btn">العربية</button>
-    </header>
+:root {
+    --ola-yellow: #ffd700;
+    --ola-teal: #00a99d;
+    --dark-bg: #101010;
+    --light-bg: #1a1a1a;
+    --white: #ffffff;
+    --text-grey: #bdbdbd;
+    --font-primary: "Poppins", sans-serif;
+    --font-arabic: "Cairo", sans-serif;
+}
 
-    <main>
-        <section class="hero container">
-            <div class="hero-background"></div>
-            <h1
-                class="hero-headline"
-                data-lang-en="From only a fuel station... to a Destination."
-                data-lang-ar="من مجرد محطة وقود... إلى وجهة متكاملة."
-            ></h1>
-        </section>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: var(--font-primary);
+    background-color: var(--dark-bg);
+    color: var(--white);
+    line-height: 1.8;
+    overflow-x: hidden;
+}
 
-        <section class="section" id="transformation">
-            <div class="container">
-                <div class="section-intro">
-                    <h2
-                        class="anim-target"
-                        data-lang-en="Visualizing the Transformation"
-                        data-lang-ar="تصوّر التحول"
-                    ></h2>
-                    <p
-                        class="anim-target"
-                        data-lang-en="We turn functional stops into vibrant lifestyle hubs. Drag the slider to see how."
-                        data-lang-ar="نحن نحوّل المحطات الوظيفية إلى مراكز حياة نابضة بالحياة. اسحب المؤشر لترى كيف."
-                    ></p>
-                </div>
-                <div class="before-after-slider anim-target" id="before-after">
-                    <div class="before-image">
-                        <img
-                            src="https://ik.imagekit.io/ko0ec3rfg/Ola/Ola%20-%20Before.jpg"
-                            alt="Standard Fuel Station Before Transformation"
-                            loading="lazy"
-                        />
-                    </div>
-                    <div class="after-image" id="after-image">
-                        <img
-                            src="https://ik.imagekit.io/ko0ec3rfg/Ola/d0b637d4-5940-4f2a-b942-5e1e6eec356d.jpg?updatedAt=1753694094824"
-                            alt="Vibrant Ola Destination After Transformation"
-                            loading="lazy"
-                        />
-                    </div>
-                    <div class="slider-handle" id="slider-handle">
-                        <div class="slider-handle-button">↔</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+body.rtl {
+    direction: rtl;
+    font-family: var(--font-arabic);
+}
 
-        <!-- B2C Flywheel as horizontal cards -->
-        <section class="section" id="b2c-cards">
-            <div class="container">
-                <div class="section-intro">
-                    <h2 class="anim-target" data-lang-en="The B2C Flywheel: Gaining Oil ROI" data-lang-ar="دورة النجاح للمستهلك: تحقيق عائد استثمار الزيوت"></h2>
-                </div>
-                <div class="flywheel-card-row">
-                    <div class="flywheel-main-card" data-lang-en="Gaining Oil ROI" data-lang-ar="تحقيق عائد الزيوت"></div>
-                    <div class="flywheel-cards">
-                        <div class="flywheel-card" data-lang-en="Car Manufacturer Loyalty" data-lang-ar="ولاء شركات تصنيع السيارات"></div>
-                        <div class="flywheel-card" data-lang-en="Raising Ola Brand Image" data-lang-ar="تعزيز صورة علامة أولا"></div>
-                        <div class="flywheel-card" data-lang-en="Changing Customer Experience" data-lang-ar="تغيير تجربة العملاء"></div>
-                        <div class="flywheel-card" data-lang-en="Gas Station Perception" data-lang-ar="تصور محطة الوقود"></div>
-                        <div class="flywheel-card" data-lang-en="Auditing & Mystery Shopping" data-lang-ar="التدقيق والمتسوق السري"></div>
-                        <div class="flywheel-card" data-lang-en="Marketing & Branding" data-lang-ar="التسويق والعلامة التجارية"></div>
-                        <div class="flywheel-card" data-lang-en="Consumer Word-of-Mouth" data-lang-ar="الكلام الشفهي للمستهلك"></div>
-                        <div class="flywheel-card" data-lang-en="Gas Station Traffic" data-lang-ar="حركة مرور المحطات"></div>
-                        <div class="flywheel-card" data-lang-en="Car Manufacturer Trust" data-lang-ar="ثقة شركات تصنيع السيارات"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-logos img {
+    height: 55px;
+}
+.lang-toggle {
+    background: var(--ola-yellow);
+    color: var(--dark-bg);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-weight: 600;
+}
 
-        <!-- B2B Flywheel as horizontal cards -->
-        <section class="section" id="b2b-cards-section">
-            <div class="container">
-                <div class="section-intro">
-                    <h2 class="anim-target" data-lang-en="Oil B2B" data-lang-ar="النفط الشركات"></h2>
-                </div>
-                <div class="flywheel-card-row">
-                    <div class="flywheel-main-card" data-lang-en="Oil B2B" data-lang-ar="النفط الشركات"></div>
-                    <div class="flywheel-cards">
-                        <div class="flywheel-card" data-lang-en="B2B Events" data-lang-ar="فعاليات الشركات"></div>
-                        <div class="flywheel-card" data-lang-en="Launching" data-lang-ar="الإطلاق"></div>
-                        <div class="flywheel-card" data-lang-en="Governorate Oil Change Outlet Branding" data-lang-ar="ترويج منافذ تغيير الزيت للمحافظات"></div>
-                        <div class="flywheel-card" data-lang-en="B2B Branding Kit" data-lang-ar="مجموعة العلامة التجارية للشركات"></div>
-                        <div class="flywheel-card" data-lang-en="Car Manufacturing Partnership" data-lang-ar="شراكة مع شركات تصنيع السيارات"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("https://ik.imagekit.io/ko0ec3rfg/Ola/backheroimage.png") no-repeat center center/cover;
+    opacity: 0.25;
+    z-index: -2;
+    animation: zoom-in-out 25s infinite alternate;
+}
+@keyframes zoom-in-out {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(18, 18, 18, 0.4) 0%, var(--dark-bg) 70%);
+    z-index: -1;
+}
+.hero-headline .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+}
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+}
+.section {
+    position: relative;
+    overflow: hidden;
+}
+.section-intro {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto 4rem auto;
+}
+h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--white);
+    line-height: 1.3;
+    font-weight: 800;
+}
+h2 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    color: var(--ola-yellow);
+    text-align: center;
+}
+h3 {
+    font-size: 1.5rem;
+    color: var(--white);
+}
+p {
+    margin-bottom: 1rem;
+    color: var(--text-grey);
+    max-width: 650px;
+}
 
-        <!-- Geo-Location Marketing stacked cards -->
-        <section class="section" id="geo-marketing">
-            <div class="container">
-                <div class="section-intro">
-                    <h2 class="anim-target" data-lang-en="Geo-Location Marketing" data-lang-ar="التسويق عبر المواقع الجغرافية"></h2>
-                </div>
-                <div class="geo-card-stack">
-                    <div class="geo-card">
-                        <span class="geo-label" data-lang-en="Objective" data-lang-ar="الهدف"></span>
-                        <span class="geo-value" data-lang-en="Drive targeted customer traffic to stations and aggressively promote Ola oil products." data-lang-ar="جذب حركة العملاء المستهدفة إلى المحطات والترويج بقوة لمنتجات زيوت أولا."></span>
-                    </div>
-                    <div class="geo-card">
-                        <span class="geo-label" data-lang-en="Execution" data-lang-ar="التنفيذ"></span>
-                        <span class="geo-value" data-lang-en="An on-site marketing campaign and roadshow carnival, managed end-to-end by Switch Communications." data-lang-ar="حملة تسويقية ميدانية وكرنفال ترويجي متنقل، تديره سويتش كوميونيكيشنز بالكامل."></span>
-                    </div>
-                    <div class="geo-card">
-                        <span class="geo-label" data-lang-en="Location" data-lang-ar="الموقع"></span>
-                        <span class="geo-value" data-lang-en="Key, high-visibility Ola Energy gas stations across the region." data-lang-ar="محطات وقود أولا إنرجي الرئيسية ذات الظهور العالي في جميع أنحاء المنطقة."></span>
-                    </div>
-                    <div class="geo-card">
-                        <span class="geo-label" data-lang-en="Method" data-lang-ar="الأسلوب"></span>
-                        <span class="geo-value" data-lang-en="Direct customer engagement through giveaways, interactive games, and exclusive on-site offers." data-lang-ar="تفاعل مباشر مع العملاء من خلال توزيع الهدايا، والألعاب التفاعلية، والعروض الحصرية في الموقع."></span>
-                    </div>
-                </div>
-            </div>
-        </section>
+/* Before & After Slider */
+.before-after-slider {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 4rem auto 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    aspect-ratio: 16 / 9;
+}
+.before-after-slider .before-image,
+.before-after-slider .after-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.before-after-slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.before-after-slider .after-image {
+    width: 50%;
+    border-right: 3px solid var(--ola-yellow);
+    transition: width 0.3s ease;
+}
+.slider-handle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    width: 50px;
+    cursor: ew-resize;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+.slider-handle-button {
+    width: 45px;
+    height: 45px;
+    background: var(--white);
+    border-radius: 50%;
+    color: var(--dark-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    user-select: none;
+}
 
-        <!-- Activation Overview Image Gallery (Above Footer) -->
-        <section id="image-carousel-section">
-            <h2 data-lang-en="Activation Overview" data-lang-ar="نظرة عامة على التفعيل"></h2>
-            <div id="image-carousel" aria-label="Image Carousel with Next button">
-                <img
-                    src="https://ik.imagekit.io/weo7pcw8v/20250720_2002_Vibrant%20Carnival%20Event_remix_01k0mcbr8gfyt9zddkxg4wgjd8.png"
-                    alt="Vibrant Carnival Event"
-                    class="carousel-image active"
-                    loading="lazy"
-                />
-                <img
-                    src="https://ik.imagekit.io/weo7pcw8v/a-captivating-lifestyle-advertisement-sh_BJhEOvCAQrK01sxAtDZo-Q_B4kMHzg6Tg2SH-K4jI6V1A.jpeg"
-                    alt="Lifestyle Advertisement"
-                    class="carousel-image"
-                    loading="lazy"
-                />
-                <img
-                    src="https://ik.imagekit.io/weo7pcw8v/Activaci%C3%B3n%20para%20NutriServicios%20en%20zona%20metropolitana%20de%20Guadalajara_%20%20_Marketing%20%20_BTL%20_StreetMarketing.jfif"
-                    alt="Street Marketing"
-                    class="carousel-image"
-                    loading="lazy"
-                />
-                <img
-                    src="https://ik.imagekit.io/weo7pcw8v/a-hyper-realistic-photo-of-an-ola-energy_wTQqN5hIQSe-8PSD3mXgKw_LK6NOMgdRj6j6n4qIhrwog.jpeg"
-                    alt="Ola Energy Photo"
-                    class="carousel-image"
-                    loading="lazy"
-                />
-                <!-- ...Add remaining images as needed... -->
-                <div class="carousel-controls">
-                    <button id="carousel-next-button" aria-label="Next Image">Next</button>
-                </div>
-            </div>
-        </section>
-    </main>
+/* Flywheel Card Row (B2C/B2B) */
+.flywheel-card-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+}
+.flywheel-main-card {
+    background: var(--ola-yellow);
+    color: var(--dark-bg);
+    font-weight: 800;
+    font-size: 1.7rem;
+    border-radius: 18px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    padding: 2rem 2.5rem;
+    min-width: 210px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flywheel-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-start;
+}
+.flywheel-card {
+    background: var(--light-bg);
+    color: var(--ola-teal);
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.13);
+    padding: 1.1rem 1.5rem;
+    min-width: 160px;
+    min-height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
-    <!-- Footer Accordion Only -->
-    <footer class="footer" role="contentinfo">
-        <div class="footer-accordion">
-            <div class="accordion-item">
-                <button class="accordion-trigger">Who We Are...?</button>
-                <div class="accordion-content">
-                    <p>
-                        Integrated Marketing Powerhouse Since 1996<br />
-                        With a legacy of over 29 years, Switch Communications delivers 360° marketing
-                        solutions across events, digital, PR, and tech. As part of the Magar Group,
-                        with subsidiaries like Egyptian Arts Group & Pulse, we have a robust history of driving
-                        real business results for global brands like BMW, Samsung, Nestlé, Vodafone, and Shell.
-                    </p>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-trigger">What We Do...?</button>
-                <div class="accordion-content">
-                    <p>
-                        From Strategy to Execution – One Agency, Infinite Impact<br />
-                        Our high-impact experiential marketing services, which include dynamic car launches and
-                        interactive exhibition booths, have been trusted by leading brands like Shell, Apache, and Khalda, BMW and Geely.
-                        <br />
-                        Digital & Growth: Data-driven performance ads, influencer campaigns, and SEO that deliver results for clients like Fayrouz and Cakes House.
-                        <br />
-                        Tech & Content: Cutting-edge UI/UX, app development, and cinematic production that bring brands to life.
-                    </p>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-trigger">Why Partner With Us?</button>
-                <div class="accordion-content">
-                    <p>
-                        Proven Results, Trusted by Global Brands<br />
-                        Our strategies are built on a foundation of deep market expertise and a relentless focus on ROI. Our successful partnership and
-                        marketing activities with Shell generated a 40% increase in qualified leads in just three weeks. Led by the artistic direction
-                        of Dr. Elhamy Magar and the strategic insight of ex-Samsung/Pfizer strategist Shady Magar, we deliver partnerships that drive growth.
-                    </p>
-                    <p><strong>Ready to elevate your brand?</strong><br />
-                        Contact: Dina Al Ashry: 010-19509494 Or Hamdi El Shim: 010-92760051
-                    </p>
-                    <img
-                        src="https://ik.imagekit.io/weo7pcw8v/Switch%20Communications%20Logo.png?updatedAt=1754664755580"
-                        alt="Switch Communications Logo"
-                        class="agency-logo"
-                        loading="lazy"
-                    />
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="scripts.js"></script>
-</body>
-</html>
+/* Geo-Location Marketing Cards */
+.geo-card-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+}
+.geo-card {
+    background: var(--light-bg);
+    border-radius: 12px;
+    padding: 1.3rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.13);
+    display: flex;
+    flex-direction: column;
+}
+.geo-label {
+    font-weight: 700;
+    color: var(--ola-teal);
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+.geo-value {
+    color: var(--white);
+    font-size: 1rem;
+}
+
+/* Image Gallery */
+#image-carousel-section {
+    background: var(--dark-bg);
+    padding: 3rem 2rem 5rem 2rem;
+}
+#image-carousel-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--ola-yellow);
+    font-weight: 800;
+    font-size: 2rem;
+}
+#image-carousel {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    height: 350px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+#image-carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 15px;
+    display: none;
+}
+#image-carousel img.active {
+    display: block;
+}
+.carousel-controls {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+#carousel-next-button {
+    background: var(--ola-yellow);
+    border: none;
+    color: var(--dark-bg);
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+/* Footer Accordion */
+.footer {
+    background: #000;
+    text-align: center;
+    padding: 3rem 2rem;
+}
+.footer-accordion {
+    max-width: 900px;
+    margin: 0 auto;
+}
+.accordion-item {
+    border-bottom: 1px solid rgba(255,255,255,0.13);
+}
+.accordion-trigger {
+    background: none;
+    border: none;
+    color: var(--ola-yellow);
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 1.3rem 0;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    transition: color 0.3s;
+}
+.accordion-trigger.active {
+    color: var(--ola-teal);
+}
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    background: var(--light-bg);
+    color: var(--white);
+    border-radius: 0 0 8px 8px;
+    padding: 0 1rem;
+}
+.accordion-content p, .accordion-content img {
+    margin: 1rem 0;
+}
+.accordion-content.show {
+    padding-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 950px) {
+    .flywheel-card-row,
+    .flywheel-cards { flex-direction: column; align-items: center; }
+    .flywheel-main-card { margin-bottom: 1rem; }
+}
+@media (max-width: 768px) {
+    .container { padding: 3rem 1rem; }
+    #image-carousel { height: 200px; }
+}
