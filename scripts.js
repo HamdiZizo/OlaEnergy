@@ -1,397 +1,231 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const currentLang = () => document.body.getAttribute("data-lang") || "en";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ola Energy: From Fuel Station to Lifestyle Destination</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@400;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+</head>
+<body data-lang="en">
+    <header class="header">
+        <div class="header-logos">
+            <img
+                src="https://ik.imagekit.io/weo7pcw8v/Ola%20TR%20Logo.png?updatedAt=1754672101855"
+                alt="Ola Energy Logo"
+            />
+        </div>
+        <button class="lang-toggle" id="lang-toggle-btn">العربية</button>
+    </header>
 
-    const updateAllTexts = (lang) => {
-        document.querySelectorAll("[data-lang-en]").forEach((el) => {
-            const text = el.getAttribute(`data-lang-${lang}`);
-            if (text !== null) el.innerHTML = text;
-        });
-    };
+    <main>
+        <section class="hero container">
+            <div class="hero-background"></div>
+            <h1
+                class="hero-headline"
+                data-lang-en="From only a fuel station... to a Destination."
+                data-lang-ar="من مجرد محطة وقود... إلى وجهة متكاملة."
+            ></h1>
+        </section>
 
-    /* Language toggle button */
-    const langToggleButton = document.getElementById("lang-toggle-btn");
-    if (langToggleButton) {
-        langToggleButton.addEventListener("click", () => {
-            const newLang = currentLang() === "en" ? "ar" : "en";
-            document.body.setAttribute("data-lang", newLang);
-            document.body.classList.toggle("rtl", newLang === "ar");
-            langToggleButton.textContent = newLang === "en" ? "English" : "العربية";
+        <section class="section" id="transformation">
+            <div class="container">
+                <div class="section-intro">
+                    <h2
+                        class="anim-target"
+                        data-lang-en="Visualizing the Transformation"
+                        data-lang-ar="تصوّر التحول"
+                    ></h2>
+                    <p
+                        class="anim-target"
+                        data-lang-en="We turn functional stops into vibrant lifestyle hubs. Drag the slider to see how."
+                        data-lang-ar="نحن نحوّل المحطات الوظيفية إلى مراكز حياة نابضة بالحياة. اسحب المؤشر لترى كيف."
+                    ></p>
+                </div>
+                <div class="before-after-slider anim-target" id="before-after">
+                    <div class="before-image">
+                        <img
+                            src="https://ik.imagekit.io/ko0ec3rfg/Ola/Ola%20-%20Before.jpg"
+                            alt="Standard Fuel Station Before Transformation"
+                            loading="lazy"
+                        />
+                    </div>
+                    <div class="after-image" id="after-image">
+                        <img
+                            src="https://ik.imagekit.io/ko0ec3rfg/Ola/d0b637d4-5940-4f2a-b942-5e1e6eec356d.jpg?updatedAt=1753694094824"
+                            alt="Vibrant Ola Destination After Transformation"
+                            loading="lazy"
+                        />
+                    </div>
+                    <div class="slider-handle" id="slider-handle">
+                        <div class="slider-handle-button">↔</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            // Update all texts immediately
-            updateAllTexts(newLang);
+        <!-- B2C Flywheel as horizontal cards -->
+        <section class="section" id="b2c-cards">
+            <div class="container">
+                <div class="section-intro">
+                    <h2 class="anim-target" data-lang-en="The B2C Flywheel: Gaining Oil ROI" data-lang-ar="دورة النجاح للمستهلك: تحقيق عائد استثمار الزيوت"></h2>
+                </div>
+                <div class="flywheel-card-row">
+                    <div class="flywheel-main-card" data-lang-en="Gaining Oil ROI" data-lang-ar="تحقيق عائد الزيوت"></div>
+                    <div class="flywheel-cards">
+                        <div class="flywheel-card" data-lang-en="Car Manufacturer Loyalty" data-lang-ar="ولاء شركات تصنيع السيارات"></div>
+                        <div class="flywheel-card" data-lang-en="Raising Ola Brand Image" data-lang-ar="تعزيز صورة علامة أولا"></div>
+                        <div class="flywheel-card" data-lang-en="Changing Customer Experience" data-lang-ar="تغيير تجربة العملاء"></div>
+                        <div class="flywheel-card" data-lang-en="Gas Station Perception" data-lang-ar="تصور محطة الوقود"></div>
+                        <div class="flywheel-card" data-lang-en="Auditing & Mystery Shopping" data-lang-ar="التدقيق والمتسوق السري"></div>
+                        <div class="flywheel-card" data-lang-en="Marketing & Branding" data-lang-ar="التسويق والعلامة التجارية"></div>
+                        <div class="flywheel-card" data-lang-en="Consumer Word-of-Mouth" data-lang-ar="الكلام الشفهي للمستهلك"></div>
+                        <div class="flywheel-card" data-lang-en="Gas Station Traffic" data-lang-ar="حركة مرور المحطات"></div>
+                        <div class="flywheel-card" data-lang-en="Car Manufacturer Trust" data-lang-ar="ثقة شركات تصنيع السيارات"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            // Re-render cycles with new language
-            if (roiCycleContainer.dataset.initialized) {
-                createAnimatedCycle(roiCycleContainer, roiCycleData.center, roiCycleData.steps);
-            }
-            if (b2bCycleContainer.dataset.initialized) {
-                createAnimatedCycle(b2bCycleContainer, b2bCycleData.center, b2bCycleData.steps);
-            }
-        });
-    }
+        <!-- B2B Flywheel as horizontal cards -->
+        <section class="section" id="b2b-cards-section">
+            <div class="container">
+                <div class="section-intro">
+                    <h2 class="anim-target" data-lang-en="Oil B2B" data-lang-ar="النفط الشركات"></h2>
+                </div>
+                <div class="flywheel-card-row">
+                    <div class="flywheel-main-card" data-lang-en="Oil B2B" data-lang-ar="النفط الشركات"></div>
+                    <div class="flywheel-cards">
+                        <div class="flywheel-card" data-lang-en="B2B Events" data-lang-ar="فعاليات الشركات"></div>
+                        <div class="flywheel-card" data-lang-en="Launching" data-lang-ar="الإطلاق"></div>
+                        <div class="flywheel-card" data-lang-en="Governorate Oil Change Outlet Branding" data-lang-ar="ترويج منافذ تغيير الزيت للمحافظات"></div>
+                        <div class="flywheel-card" data-lang-en="B2B Branding Kit" data-lang-ar="مجموعة العلامة التجارية للشركات"></div>
+                        <div class="flywheel-card" data-lang-en="Car Manufacturing Partnership" data-lang-ar="شراكة مع شركات تصنيع السيارات"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    /* --- The B2C Flywheel: Gaining Oil ROI Cycle with circle arrangement adjustment --- */
-    const createAnimatedCycle = (container, centerHTML, stepsData) => {
-        container.innerHTML = "";
-        const centerCore = document.createElement("div");
-        centerCore.classList.add("center-core");
-        container.appendChild(centerCore);
+        <!-- Geo-Location Marketing stacked cards -->
+        <section class="section" id="geo-marketing">
+            <div class="container">
+                <div class="section-intro">
+                    <h2 class="anim-target" data-lang-en="Geo-Location Marketing" data-lang-ar="التسويق عبر المواقع الجغرافية"></h2>
+                </div>
+                <div class="geo-card-stack">
+                    <div class="geo-card">
+                        <span class="geo-label" data-lang-en="Objective" data-lang-ar="الهدف"></span>
+                        <span class="geo-value" data-lang-en="Drive targeted customer traffic to stations and aggressively promote Ola oil products." data-lang-ar="جذب حركة العملاء المستهدفة إلى المحطات والترويج بقوة لمنتجات زيوت أولا."></span>
+                    </div>
+                    <div class="geo-card">
+                        <span class="geo-label" data-lang-en="Execution" data-lang-ar="التنفيذ"></span>
+                        <span class="geo-value" data-lang-en="An on-site marketing campaign and roadshow carnival, managed end-to-end by Switch Communications." data-lang-ar="حملة تسويقية ميدانية وكرنفال ترويجي متنقل، تديره سويتش كوميونيكيشنز بالكامل."></span>
+                    </div>
+                    <div class="geo-card">
+                        <span class="geo-label" data-lang-en="Location" data-lang-ar="الموقع"></span>
+                        <span class="geo-value" data-lang-en="Key, high-visibility Ola Energy gas stations across the region." data-lang-ar="محطات وقود أولا إنرجي الرئيسية ذات الظهور العالي في جميع أنحاء المنطقة."></span>
+                    </div>
+                    <div class="geo-card">
+                        <span class="geo-label" data-lang-en="Method" data-lang-ar="الأسلوب"></span>
+                        <span class="geo-value" data-lang-en="Direct customer engagement through giveaways, interactive games, and exclusive on-site offers." data-lang-ar="تفاعل مباشر مع العملاء من خلال توزيع الهدايا، والألعاب التفاعلية، والعروض الحصرية في الموقع."></span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        const numSteps = stepsData.length;
-        const usableHeight = container.offsetHeight - 100;
-        const radius = Math.min(container.offsetWidth, usableHeight) / 2 - 85;
+        <!-- Activation Overview Image Gallery (Above Footer) -->
+        <section id="image-carousel-section">
+            <h2 data-lang-en="Activation Overview" data-lang-ar="نظرة عامة على التفعيل"></h2>
+            <div id="image-carousel" aria-label="Image Carousel with Next button">
+                <img
+                    src="https://ik.imagekit.io/weo7pcw8v/20250720_2002_Vibrant%20Carnival%20Event_remix_01k0mcbr8gfyt9zddkxg4wgjd8.png"
+                    alt="Vibrant Carnival Event"
+                    class="carousel-image active"
+                    loading="lazy"
+                />
+                <img
+                    src="https://ik.imagekit.io/weo7pcw8v/a-captivating-lifestyle-advertisement-sh_BJhEOvCAQrK01sxAtDZo-Q_B4kMHzg6Tg2SH-K4jI6V1A.jpeg"
+                    alt="Lifestyle Advertisement"
+                    class="carousel-image"
+                    loading="lazy"
+                />
+                <img
+                    src="https://ik.imagekit.io/weo7pcw8v/Activaci%C3%B3n%20para%20NutriServicios%20en%20zona%20metropolitana%20de%20Guadalajara_%20%20_Marketing%20%20_BTL%20_StreetMarketing.jfif"
+                    alt="Street Marketing"
+                    class="carousel-image"
+                    loading="lazy"
+                />
+                <img
+                    src="https://ik.imagekit.io/weo7pcw8v/a-hyper-realistic-photo-of-an-ola-energy_wTQqN5hIQSe-8PSD3mXgKw_LK6NOMgdRj6j6n4qIhrwog.jpeg"
+                    alt="Ola Energy Photo"
+                    class="carousel-image"
+                    loading="lazy"
+                />
+                <!-- ...Add remaining images as needed... -->
+                <div class="carousel-controls">
+                    <button id="carousel-next-button" aria-label="Next Image">Next</button>
+                </div>
+            </div>
+        </section>
+    </main>
 
-        for (let i = 0; i < numSteps; i++) {
-            const stepDiv = document.createElement("div");
-            stepDiv.classList.add("cycle-step");
-            stepDiv.setAttribute("data-lang-en", stepsData[i].en);
-            stepDiv.setAttribute("data-lang-ar", stepsData[i].ar);
-
-            // Position evenly spaced around circle, starting from top
-            const angle = (i / numSteps) * 2 * Math.PI - Math.PI / 2;
-            const leftPos = container.offsetWidth / 2 + radius * Math.cos(angle);
-            const topPos = container.offsetHeight / 2 + radius * Math.sin(angle);
-
-            stepDiv.style.left = `${leftPos}px`;
-            stepDiv.style.top = `${topPos}px`;
-
-            container.appendChild(stepDiv);
-        }
-
-        // Set center core content with language replacement
-        const lang = currentLang();
-        centerCore.innerHTML = centerHTML.replace(/\[lang\]/g, lang);
-
-        // Update each step's displayed text for current language
-        container.querySelectorAll(".cycle-step").forEach((step, i) => {
-            step.innerHTML = stepsData[i][lang];
-        });
-    };
-
-    /* Data for B2C (ROI) cycle */
-    const roiCycleData = {
-        center: `<span data-lang-en="Gaining\nOil ROI" data-lang-ar="تحقيق\nعائد الزيوت"></span>`,
-        steps: [
-            { en: "1. Car Manufacturer Loyalty", ar: "١. ولاء شركات تصنيع السيارات" },
-            { en: "2. Raising Ola Brand Image", ar: "٢. تعزيز صورة علامة أولا" },
-            { en: "3. Changing Customer Experience", ar: "٣. تغيير تجربة العملاء" },
-            { en: "4. Gas Station Perception", ar: "٤. تصور محطة الوقود" },
-            { en: "5. Auditing & Mystery Shopping", ar: "٥. التدقيق والمتسوق السري" },
-            { en: "6. Marketing & Branding", ar: "٦. التسويق والعلامة التجارية" },
-            { en: "7. Consumer Word-of-Mouth", ar: "٧. الكلام الشفهي للمستهلك" },
-            { en: "8. Gas Station Traffic", ar: "٨. حركة مرور المحطات" },
-            { en: "9. Car Manufacturer Trust", ar: "٩. ثقة شركات تصنيع السيارات" },
-        ],
-    };
-
-    /* Data for B2B cycle */
-    const b2bCycleData = {
-        center: `<span data-lang-en="Oil B2B" data-lang-ar="النفط الشركات"></span>`,
-        steps: [
-            { en: "1. B2B Events", ar: "١. فعاليات الشركات" },
-            { en: "2. Launching", ar: "٢. الإطلاق" },
-            { en: "3. Governorate Oil Change Outlet Branding", ar: "٣. ترويج منافذ تغيير الزيت للمحافظات" },
-            { en: "4. B2B Branding Kit", ar: "٤. مجموعة العلامة التجارية للشركات" },
-            { en: "5. Car Manufacturing Partnership", ar: "٥. شراكة مع شركات تصنيع السيارات" },
-        ],
-    };
-
-    const roiCycleContainer = document.getElementById("roi-cycle-container");
-    const b2bCycleContainer = document.getElementById("b2b-cycle-container");
-
-    /* Intersection Observer for lazy init of cycles and anim-targets */
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = "1";
-
-                    if (entry.target === roiCycleContainer && !roiCycleContainer.dataset.initialized) {
-                        createAnimatedCycle(roiCycleContainer, roiCycleData.center, roiCycleData.steps);
-                        anime({
-                            targets: roiCycleContainer.querySelectorAll(".cycle-step"),
-                            scale: [0.5, 1],
-                            opacity: [0, 1],
-                            delay: anime.stagger(250),
-                            duration: 1200,
-                            easing: "easeOutElastic(1, .8)",
-                        });
-                        roiCycleContainer.dataset.initialized = "true";
-                    }
-
-                    if (entry.target === b2bCycleContainer && !b2bCycleContainer.dataset.initialized) {
-                        createAnimatedCycle(b2bCycleContainer, b2bCycleData.center, b2bCycleData.steps);
-                        anime({
-                            targets: b2bCycleContainer.querySelectorAll(".cycle-step"),
-                            scale: [0.5, 1],
-                            opacity: [0, 1],
-                            delay: anime.stagger(300),
-                            duration: 1200,
-                            easing: "easeOutElastic(1, .8)",
-                        });
-                        b2bCycleContainer.dataset.initialized = "true";
-                        startB2BCardsSequence();
-                    }
-
-                    if (entry.target.classList.contains("blueprint-item")) {
-                        const dt = entry.target.querySelector("dt");
-                        const dd = entry.target.querySelector("dd");
-
-                        anime({ targets: dt, translateX: [-30, 0], opacity: [0, 1], duration: 800 });
-
-                        const text = dd.getAttribute(`data-text-${currentLang()}`);
-                        let i = 0;
-                        dd.innerHTML = "";
-                        const cursor = document.createElement("span");
-                        cursor.className = "typing-cursor";
-                        dd.appendChild(cursor);
-
-                        function type() {
-                            if (i < text.length) {
-                                dd.insertBefore(document.createTextNode(text.charAt(i)), cursor);
-                                i++;
-                                setTimeout(type, 25);
-                            } else {
-                                cursor.style.display = "none";
-                            }
-                        }
-                        setTimeout(type, 600);
-                    }
-
-                    if (
-                        entry.target.id === "ola-remodelling" ||
-                        entry.target.id === "action-plan"
-                    ) {
-                        entry.target.classList.add("visible");
-                    }
-
-                    observer.unobserve(entry.target);
-                }
-            });
-        },
-        { threshold: 0.15 }
-    );
-
-    document.querySelectorAll(".anim-target").forEach((el) => observer.observe(el));
-    const olaRemodellingEl = document.getElementById("ola-remodelling");
-    if (olaRemodellingEl) observer.observe(olaRemodellingEl);
-    const actionPlanEl = document.getElementById("action-plan");
-    if (actionPlanEl) observer.observe(actionPlanEl);
-
-    /* Hero headline text animation */
-    const heroHeadline = document.querySelector(".hero-headline");
-    const heroText = heroHeadline.getAttribute(`data-lang-${currentLang()}`);
-    heroHeadline.innerHTML = heroText.replace(/(\S+\s*)/g, `<span class="word">$&</span>`);
-    anime
-        .timeline({ easing: "easeOutExpo" })
-        .add({
-            targets: ".hero-headline .word",
-            opacity: [0, 1],
-            translateY: [30, 0],
-            delay: anime.stagger(200),
-            duration: 800,
-        });
-
-    /* Before & After slider functionality */
-    const sliderContainer = document.getElementById("before-after");
-    if (sliderContainer) {
-        const afterImage = document.getElementById("after-image");
-        const handle = document.getElementById("slider-handle");
-        let isDragging = false;
-
-        const onDrag = (e) => {
-            if (!isDragging) return;
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const rect = sliderContainer.getBoundingClientRect();
-            let offsetX = clientX - rect.left;
-
-            if (offsetX < 0) offsetX = 0;
-            if (offsetX > rect.width) offsetX = rect.width;
-
-            afterImage.style.width = `${offsetX}px`;
-            handle.style.left = `${offsetX}px`;
-        };
-
-        handle.addEventListener("mousedown", (e) => {
-            isDragging = true;
-            e.preventDefault();
-        });
-        document.addEventListener("mouseup", () => {
-            isDragging = false;
-        });
-        document.addEventListener("mousemove", onDrag);
-        handle.addEventListener(
-            "touchstart",
-            (e) => {
-                isDragging = true;
-                e.preventDefault();
-            },
-            { passive: false }
-        );
-        document.addEventListener("touchend", () => {
-            isDragging = false;
-        });
-        document.addEventListener("touchmove", onDrag);
-    }
-
-    /* Activation Overview slideshow auto rotating */
-    const slideshow = document.getElementById("overview-slideshow");
-    if (slideshow) {
-        const slides = slideshow.querySelectorAll(".slide");
-        if (slides.length > 1) {
-            let currentSlide = 0;
-            setInterval(() => {
-                slides[currentSlide].classList.remove("active");
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add("active");
-            }, 4000);
-        }
-    }
-
-    /* Accordion menu in footer */
-    // Find the content blocks for the accordion
-    const footer = document.querySelector('.footer');
-    if (footer) {
-        // Only run if not already present
-        if (!document.querySelector('.accordion-footer')) {
-            // Create accordion container
-            const accordionFooter = document.createElement('div');
-            accordionFooter.className = 'accordion-footer';
-
-            // Content for the three main sections
-            const sections = [
-                {
-                    title: "Who We Are...?",
-                    content: `<p>Integrated Marketing Powerhouse Since 1996<br />
+    <!-- Footer Accordion Only -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-accordion">
+            <div class="accordion-item">
+                <button class="accordion-trigger">Who We Are...?</button>
+                <div class="accordion-content">
+                    <p>
+                        Integrated Marketing Powerhouse Since 1996<br />
                         With a legacy of over 29 years, Switch Communications delivers 360° marketing
                         solutions across events, digital, PR, and tech. As part of the Magar Group,
                         with subsidiaries like Egyptian Arts Group & Pulse, we have a robust history of driving
                         real business results for global brands like BMW, Samsung, Nestlé, Vodafone, and Shell.
-                        </p>`
-                },
-                {
-                    title: "What We Do...?",
-                    content: `<p>From Strategy to Execution – One Agency, Infinite Impact<br />
+                    </p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-trigger">What We Do...?</button>
+                <div class="accordion-content">
+                    <p>
+                        From Strategy to Execution – One Agency, Infinite Impact<br />
                         Our high-impact experiential marketing services, which include dynamic car launches and
                         interactive exhibition booths, have been trusted by leading brands like Shell, Apache, and Khalda, BMW and Geely.
                         <br />
                         Digital & Growth: Data-driven performance ads, influencer campaigns, and SEO that deliver results for clients like Fayrouz and Cakes House.
                         <br />
                         Tech & Content: Cutting-edge UI/UX, app development, and cinematic production that bring brands to life.
-                        </p>`
-                },
-                {
-                    title: "Why Partner With Us?",
-                    content: `<p>Proven Results, Trusted by Global Brands<br />
+                    </p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-trigger">Why Partner With Us?</button>
+                <div class="accordion-content">
+                    <p>
+                        Proven Results, Trusted by Global Brands<br />
                         Our strategies are built on a foundation of deep market expertise and a relentless focus on ROI. Our successful partnership and
                         marketing activities with Shell generated a 40% increase in qualified leads in just three weeks. Led by the artistic direction
                         of Dr. Elhamy Magar and the strategic insight of ex-Samsung/Pfizer strategist Shady Magar, we deliver partnerships that drive growth.
-                        </p>
-                        <p><strong>Ready to elevate your brand?</strong><br />
-                        Contact: Dina Al Ashry: 010-19509494 Or Hamdi El Shim: 010-92760051</p>
-                        <img
-                            src="https://ik.imagekit.io/weo7pcw8v/Switch%20Communications%20Logo.png?updatedAt=1754664755580"
-                            alt="Switch Communications Logo"
-                            class="agency-logo"
-                            loading="lazy"
-                        />`
-                }
-            ];
-
-            // Build accordion items
-            sections.forEach((sec, idx) => {
-                const item = document.createElement('div');
-                item.className = 'accordion-item';
-
-                const trigger = document.createElement('div');
-                trigger.className = 'accordion-trigger';
-                trigger.innerHTML = `<span>${sec.title}</span>`;
-
-                const content = document.createElement('div');
-                content.className = 'accordion-content';
-                content.innerHTML = `<div class="content-inner">${sec.content}</div>`;
-
-                item.appendChild(trigger);
-                item.appendChild(content);
-                accordionFooter.appendChild(item);
-
-                // Accordion functionality
-                trigger.addEventListener('click', () => {
-                    trigger.classList.toggle('active');
-                    if (trigger.classList.contains('active')) {
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    } else {
-                        content.style.maxHeight = null;
-                    }
-                });
-            });
-
-            // Insert accordion before the agency logo in the footer
-            const agencyLogo = footer.querySelector('.agency-logo');
-            footer.insertBefore(accordionFooter, agencyLogo);
-            // Hide original plain text sections to prevent duplicate info
-            Array.from(footer.querySelectorAll('p')).forEach(p => {
-                if (p.textContent.includes('Who We Are') || p.textContent.includes('What We Do') || p.textContent.includes('Why Partner')) {
-                    p.style.display = 'none';
-                }
-            });
-        }
-    }
-
-    /* B2B cards fade in sequence with arrow navigation */
-    const b2bCardsContainer = document.getElementById("b2b-cards");
-    const b2bCards = b2bCardsContainer ? Array.from(
-        b2bCardsContainer.querySelectorAll(".strategic-card.fade-in")
-    ) : [];
-    const nextBtn = b2bCardsContainer ? document.getElementById("card-next-button") : null;
-    let currentCardIndex = 0;
-
-    function showCard(index) {
-        if (index < 0 || index >= b2bCards.length) return;
-        b2bCards.forEach((card, i) => {
-            if (i === index) card.classList.add("visible");
-            else card.classList.remove("visible");
-        });
-        nextBtn.style.display = index < b2bCards.length - 1 ? "inline-block" : "none";
-        currentCardIndex = index;
-        b2bCards[index].focus();
-    }
-
-    function startB2BCardsSequence() {
-        showCard(0);
-    }
-
-    if (nextBtn) {
-        nextBtn.addEventListener("click", () => {
-            if (currentCardIndex < b2bCards.length - 1) {
-                showCard(currentCardIndex + 1);
-            }
-        });
-    }
-
-    /* Image carousel with Next button */
-    const carousel = document.getElementById("image-carousel");
-    if (carousel) {
-        const images = Array.from(carousel.querySelectorAll("img.carousel-image"));
-        const nextCarouselBtn = document.getElementById("carousel-next-button");
-        let currentImageIndex = 0;
-
-        function showImage(index) {
-            images.forEach((img, i) => {
-                img.classList.toggle('active', i === index);
-            });
-            currentImageIndex = index;
-        }
-
-        if (nextCarouselBtn) {
-            nextCarouselBtn.addEventListener("click", () => {
-                let nextIndex = (currentImageIndex + 1) % images.length;
-                showImage(nextIndex);
-            });
-        }
-
-        showImage(0);
-    }
-
-    updateAllTexts(currentLang());
-});
+                    </p>
+                    <p><strong>Ready to elevate your brand?</strong><br />
+                        Contact: Dina Al Ashry: 010-19509494 Or Hamdi El Shim: 010-92760051
+                    </p>
+                    <img
+                        src="https://ik.imagekit.io/weo7pcw8v/Switch%20Communications%20Logo.png?updatedAt=1754664755580"
+                        alt="Switch Communications Logo"
+                        class="agency-logo"
+                        loading="lazy"
+                    />
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
