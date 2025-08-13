@@ -38,7 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
         container.appendChild(centerCore);
 
         const numSteps = stepsData.length;
-        const radius = container.offsetWidth / 2 - 85; // Adjusted radius for better circle roundness
+        const usableHeight = container.offsetHeight - 100;
+        const radius = Math.min(container.offsetWidth, usableHeight) / 2 - 85;
 
         for (let i = 0; i < numSteps; i++) {
             const stepDiv = document.createElement("div");
@@ -46,8 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
             stepDiv.setAttribute("data-lang-en", stepsData[i].en);
             stepDiv.setAttribute("data-lang-ar", stepsData[i].ar);
 
-            // Position evenly spaced around circle 
-            // Start from 90deg (top center)
+            // Position evenly spaced around circle, starting from top
             const angle = (i / numSteps) * 2 * Math.PI - Math.PI / 2;
             const leftPos = container.offsetWidth / 2 + radius * Math.cos(angle);
             const topPos = container.offsetHeight / 2 + radius * Math.sin(angle);
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ],
     };
 
-    /* Data for B2B cycle (adjusted per feedback) with main center and 5 circles */
+    /* Data for B2B cycle */
     const b2bCycleData = {
         center: `<span data-lang-en="Oil B2B" data-lang-ar="النفط الشركات"></span>`,
         steps: [
@@ -130,7 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             easing: "easeOutElastic(1, .8)",
                         });
                         b2bCycleContainer.dataset.initialized = "true";
-                        // Trigger B2B cards animations sequence start
                         startB2BCardsSequence();
                     }
 
@@ -173,7 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
         { threshold: 0.15 }
     );
 
-    /* Observe anim-target elements and new #ola-remodelling, #action-plan */
     document.querySelectorAll(".anim-target").forEach((el) => observer.observe(el));
     const olaRemodellingEl = document.getElementById("ola-remodelling");
     if (olaRemodellingEl) observer.observe(olaRemodellingEl);
@@ -250,26 +248,102 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    /* Accordion functional toggling */
-    const accordionTriggers = document.querySelectorAll(".accordion-trigger");
-    accordionTriggers.forEach((trigger) => {
-        trigger.addEventListener("click", () => {
-            const content = trigger.nextElementSibling;
-            trigger.classList.toggle("active");
-            if (trigger.classList.contains("active")) {
-                content.style.maxHeight = content.scrollHeight + "px";
-            } else {
-                content.style.maxHeight = null;
-            }
-        });
-    });
+    /* Accordion menu in footer */
+    // Find the content blocks for the accordion
+    const footer = document.querySelector('.footer');
+    if (footer) {
+        // Only run if not already present
+        if (!document.querySelector('.accordion-footer')) {
+            // Create accordion container
+            const accordionFooter = document.createElement('div');
+            accordionFooter.className = 'accordion-footer';
+
+            // Content for the three main sections
+            const sections = [
+                {
+                    title: "Who We Are...?",
+                    content: `<p>Integrated Marketing Powerhouse Since 1996<br />
+                        With a legacy of over 29 years, Switch Communications delivers 360° marketing
+                        solutions across events, digital, PR, and tech. As part of the Magar Group,
+                        with subsidiaries like Egyptian Arts Group & Pulse, we have a robust history of driving
+                        real business results for global brands like BMW, Samsung, Nestlé, Vodafone, and Shell.
+                        </p>`
+                },
+                {
+                    title: "What We Do...?",
+                    content: `<p>From Strategy to Execution – One Agency, Infinite Impact<br />
+                        Our high-impact experiential marketing services, which include dynamic car launches and
+                        interactive exhibition booths, have been trusted by leading brands like Shell, Apache, and Khalda, BMW and Geely.
+                        <br />
+                        Digital & Growth: Data-driven performance ads, influencer campaigns, and SEO that deliver results for clients like Fayrouz and Cakes House.
+                        <br />
+                        Tech & Content: Cutting-edge UI/UX, app development, and cinematic production that bring brands to life.
+                        </p>`
+                },
+                {
+                    title: "Why Partner With Us?",
+                    content: `<p>Proven Results, Trusted by Global Brands<br />
+                        Our strategies are built on a foundation of deep market expertise and a relentless focus on ROI. Our successful partnership and
+                        marketing activities with Shell generated a 40% increase in qualified leads in just three weeks. Led by the artistic direction
+                        of Dr. Elhamy Magar and the strategic insight of ex-Samsung/Pfizer strategist Shady Magar, we deliver partnerships that drive growth.
+                        </p>
+                        <p><strong>Ready to elevate your brand?</strong><br />
+                        Contact: Dina Al Ashry: 010-19509494 Or Hamdi El Shim: 010-92760051</p>
+                        <img
+                            src="https://ik.imagekit.io/weo7pcw8v/Switch%20Communications%20Logo.png?updatedAt=1754664755580"
+                            alt="Switch Communications Logo"
+                            class="agency-logo"
+                            loading="lazy"
+                        />`
+                }
+            ];
+
+            // Build accordion items
+            sections.forEach((sec, idx) => {
+                const item = document.createElement('div');
+                item.className = 'accordion-item';
+
+                const trigger = document.createElement('div');
+                trigger.className = 'accordion-trigger';
+                trigger.innerHTML = `<span>${sec.title}</span>`;
+
+                const content = document.createElement('div');
+                content.className = 'accordion-content';
+                content.innerHTML = `<div class="content-inner">${sec.content}</div>`;
+
+                item.appendChild(trigger);
+                item.appendChild(content);
+                accordionFooter.appendChild(item);
+
+                // Accordion functionality
+                trigger.addEventListener('click', () => {
+                    trigger.classList.toggle('active');
+                    if (trigger.classList.contains('active')) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } else {
+                        content.style.maxHeight = null;
+                    }
+                });
+            });
+
+            // Insert accordion before the agency logo in the footer
+            const agencyLogo = footer.querySelector('.agency-logo');
+            footer.insertBefore(accordionFooter, agencyLogo);
+            // Hide original plain text sections to prevent duplicate info
+            Array.from(footer.querySelectorAll('p')).forEach(p => {
+                if (p.textContent.includes('Who We Are') || p.textContent.includes('What We Do') || p.textContent.includes('Why Partner')) {
+                    p.style.display = 'none';
+                }
+            });
+        }
+    }
 
     /* B2B cards fade in sequence with arrow navigation */
     const b2bCardsContainer = document.getElementById("b2b-cards");
-    const b2bCards = Array.from(
+    const b2bCards = b2bCardsContainer ? Array.from(
         b2bCardsContainer.querySelectorAll(".strategic-card.fade-in")
-    );
-    const nextBtn = document.getElementById("card-next-button");
+    ) : [];
+    const nextBtn = b2bCardsContainer ? document.getElementById("card-next-button") : null;
     let currentCardIndex = 0;
 
     function showCard(index) {
@@ -278,15 +352,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if (i === index) card.classList.add("visible");
             else card.classList.remove("visible");
         });
-        // Show next button only if not last card
         nextBtn.style.display = index < b2bCards.length - 1 ? "inline-block" : "none";
         currentCardIndex = index;
-        // Accessibility: Focus the visible card
         b2bCards[index].focus();
     }
 
     function startB2BCardsSequence() {
-        // Initialize starting with first card visible
         showCard(0);
     }
 
@@ -299,7 +370,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* Image carousel with Next button */
-    const carouselSection = document.getElementById("image-carousel-section");
     const carousel = document.getElementById("image-carousel");
     if (carousel) {
         const images = Array.from(carousel.querySelectorAll("img.carousel-image"));
@@ -308,11 +378,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function showImage(index) {
             images.forEach((img, i) => {
-                if (i === index) {
-                    img.classList.add("active");
-                } else {
-                    img.classList.remove("active");
-                }
+                img.classList.toggle('active', i === index);
             });
             currentImageIndex = index;
         }
@@ -324,10 +390,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // Initialize with first image visible
         showImage(0);
     }
 
-    /* Initial texts update */
     updateAllTexts(currentLang());
 });
