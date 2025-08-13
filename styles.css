@@ -1,2 +1,631 @@
-/* Paste your full CSS code from the previous <style> block here */
-/* ... (all code as in your provided example) ... */
+:root {
+    --ola-yellow: #ffd700;
+    --ola-teal: #00a99d;
+    --dark-bg: #101010;
+    --light-bg: #1a1a1a;
+    --white: #ffffff;
+    --text-grey: #bdbdbd;
+    --font-primary: "Poppins", sans-serif;
+    --font-arabic: "Cairo", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: var(--font-primary);
+    background-color: var(--dark-bg);
+    color: var(--white);
+    line-height: 1.8;
+    overflow-x: hidden;
+}
+
+/* RTL (Arabic) Styles */
+body.rtl {
+    direction: rtl;
+    font-family: var(--font-arabic);
+}
+body.rtl h1,
+body.rtl h2,
+body.rtl h3,
+body.rtl h4,
+body.rtl p,
+body.rtl li,
+body.rtl a,
+body.rtl button,
+body.rtl span,
+body.rtl strong,
+body.rtl label,
+body.rtl cite,
+body.rtl dt,
+body.rtl dd {
+    font-family: var(--font-arabic);
+}
+body.rtl .header {
+    flex-direction: row-reverse;
+}
+body.rtl .before-after-slider .after-image {
+    border-left: none;
+    border-right: 3px solid var(--ola-yellow);
+}
+body.rtl .blueprint-item dt {
+    padding-right: 0;
+}
+body.rtl .geo-list dt {
+    padding-left: 1rem;
+    padding-right: 0;
+}
+body.rtl .accordion-trigger::after {
+    left: 1.5rem;
+    right: auto;
+    transform: rotate(-135deg);
+}
+body.rtl .accordion-trigger.active::after {
+    transform: rotate(45deg);
+}
+
+/* General */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+}
+.section {
+    position: relative;
+    overflow: hidden;
+}
+.section-intro {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto 4rem auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--white);
+    line-height: 1.3;
+    font-weight: 800;
+}
+h2 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    color: var(--ola-yellow);
+    text-align: center;
+}
+h3 {
+    font-size: 1.5rem;
+    color: var(--white);
+}
+p {
+    margin-bottom: 1rem;
+    color: var(--text-grey);
+    max-width: 650px;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-logos img {
+    height: 55px;
+    transition: height 0.3s ease;
+}
+.lang-toggle {
+    background: var(--ola-yellow);
+    color: var(--dark-bg);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+/* Hero */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("https://ik.imagekit.io/ko0ec3rfg/Ola/backheroimage.png")
+        no-repeat center center/cover;
+    opacity: 0.25;
+    z-index: -2;
+    animation: zoom-in-out 25s infinite alternate;
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(18, 18, 18, 0.4) 0%, var(--dark-bg) 70%);
+    z-index: -1;
+}
+@keyframes zoom-in-out {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+.hero-headline .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Before & After Slider */
+.before-after-slider {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 4rem auto 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    aspect-ratio: 16 / 9;
+}
+.before-after-slider .before-image,
+.before-after-slider .after-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.before-after-slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.before-after-slider .after-image {
+    width: 50%;
+    border-right: 3px solid var(--ola-yellow);
+    transition: width 0.3s ease;
+}
+body.rtl .before-after-slider .after-image {
+    border-right: none;
+    border-left: 3px solid var(--ola-yellow);
+}
+.slider-handle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    width: 50px;
+    cursor: ew-resize;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+.slider-handle-button {
+    width: 45px;
+    height: 45px;
+    background: var(--white);
+    border-radius: 50%;
+    color: var(--dark-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    user-select: none;
+}
+
+/* Strategic Proposal Section */
+.strategic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+.strategic-card {
+    background: var(--light-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-grey);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.strategic-card.active {
+    opacity: 1;
+}
+.strategic-card h3 {
+    color: var(--ola-teal);
+    margin-bottom: 1rem;
+}
+
+/* Activation Blueprint with Typing Effect */
+.blueprint-list {
+    margin-top: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.blueprint-item {
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+.blueprint-item.visible {
+    opacity: 1;
+}
+.blueprint-item dt {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+.blueprint-item dd {
+    color: var(--text-grey);
+    min-height: 50px;
+    white-space: pre-wrap;
+}
+.typing-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2rem;
+    background-color: var(--ola-yellow);
+    animation: blink 0.7s infinite;
+    vertical-align: bottom;
+}
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Animated Cycle */
+.cycle-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem 0;
+}
+.cycle-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    user-select: none;
+}
+.center-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: var(--ola-yellow);
+    color: var(--dark-bg);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 1rem;
+    z-index: 10;
+    user-select: none;
+    white-space: pre-line;
+}
+.cycle-step {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    background: var(--light-bg);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    user-select: none;
+}
+
+/* Geo-location Marketing */
+.geo-list {
+    margin-top: 3rem;
+}
+.geo-list div {
+    display: flex;
+    margin-bottom: 1rem;
+    background: var(--light-bg);
+    padding: 1rem;
+    border-radius: 8px;
+}
+.geo-list dt {
+    flex: 0 0 120px;
+    font-weight: 700;
+    color: var(--ola-teal);
+    padding-right: 1rem;
+}
+.geo-list dd {
+    color: var(--text-grey);
+}
+
+/* Slideshow for Activation Overview */
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 10px;
+    user-select: none;
+}
+.slideshow-container .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+.slideshow-container .slide.active {
+    opacity: 1;
+    position: relative;
+    z-index: 1;
+}
+
+/* Accordion Section */
+.accordion-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.accordion-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    cursor: pointer;
+    user-select: none;
+}
+.accordion-trigger h3 {
+    margin: 0;
+    color: var(--white);
+    font-size: 1.5rem;
+}
+.accordion-trigger::after {
+    content: "+";
+    font-size: 2.5rem;
+    color: var(--ola-yellow);
+    transition: transform 0.3s;
+}
+.accordion-trigger.active::after {
+    transform: rotate(45deg);
+}
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+.accordion-content .content-inner {
+    padding: 1rem 0 2rem 0;
+}
+.accordion-content p,
+.accordion-content ol {
+    margin-bottom: 1rem;
+}
+.accordion-content ol {
+    padding-left: 1.5rem;
+    list-style-position: inside;
+}
+.accordion-content h4 {
+    color: var(--ola-teal);
+    margin-top: 1.5rem;
+}
+.accordion-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* Footer */
+.footer {
+    background: #000;
+    text-align: center;
+    padding: 3rem 2rem;
+}
+.footer p {
+    color: var(--text-grey);
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+.footer .agency-logo {
+    height: 60px;
+    margin-top: 1rem;
+    opacity: 0.9;
+    transition: height 0.3s ease;
+}
+
+/* New Section: Ola's Energy Remodelling Bullet List */
+#ola-remodelling {
+    max-width: 700px;
+    margin: 2rem auto 6rem auto;
+    background: var(--light-bg);
+    border-radius: 12px;
+    padding: 2rem 3rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    color: var(--white);
+    font-family: var(--font-primary);
+    user-select: none;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+#ola-remodelling.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+#ola-remodelling h2 {
+    margin-bottom: 1.5rem;
+    color: var(--ola-yellow);
+    text-align: center;
+    font-weight: 800;
+    user-select: text;
+}
+#ola-remodelling ul {
+    list-style: disc inside;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--ola-teal);
+}
+#ola-remodelling ul li {
+    margin-bottom: 0.8rem;
+    user-select: text;
+}
+
+/* New Section: Action Plan */
+#action-plan {
+    max-width: 750px;
+    margin: 3rem auto 6rem auto;
+    background: var(--light-bg);
+    border-radius: 12px;
+    padding: 2rem 3rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    color: var(--white);
+    user-select: none;
+    font-family: var(--font-primary);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+#action-plan.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+#action-plan h2 {
+    margin-bottom: 1.5rem;
+    color: var(--ola-yellow);
+    text-align: center;
+    font-weight: 800;
+    user-select: text;
+}
+#action-plan p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: var(--text-grey);
+    line-height: 1.5;
+    user-select: text;
+}
+
+/* New Section: Image Carousel above footer */
+#image-carousel-section {
+    background: var(--dark-bg);
+    padding: 3rem 2rem 5rem 2rem;
+    user-select: none;
+}
+#image-carousel-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--ola-yellow);
+    font-weight: 800;
+    font-size: 2rem;
+}
+#image-carousel {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+#image-carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    user-select: none;
+    pointer-events: none;
+}
+#image-carousel .carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    transform: translateY(-50%);
+    pointer-events: auto;
+    user-select: none;
+}
+#image-carousel button {
+    background: var(--ola-yellow);
+    border: none;
+    color: var(--dark-bg);
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-right: 15px;
+    user-select: none;
+    transition: background-color 0.3s ease;
+}
+#image-carousel button:hover,
+#image-carousel button:focus {
+    background: #ffc800;
+    outline: none;
+}
+
+/* Fade animations for B2B cards */
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+.fade-in.visible {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .cycle-container {
+        transform: scale(0.7);
+    }
+    #image-carousel {
+        height: 250px;
+    }
+}
